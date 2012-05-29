@@ -1,7 +1,9 @@
 package fi.koku.services.entity.person.v1.impl;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,9 +16,13 @@ import fi.koku.services.entity.customer.v1.CustomerType;
 import fi.koku.services.entity.customer.v1.CustomersType;
 import fi.koku.services.entity.customer.v1.PicsType;
 import fi.koku.services.entity.customer.v1.ServiceFault;
+import fi.koku.services.entity.person.v1.Group;
 import fi.koku.services.entity.person.v1.Person;
 import fi.koku.services.entity.person.v1.PersonConstants;
 import fi.koku.services.entity.person.v1.PersonInfoProvider;
+import fi.koku.services.utility.user.v1.GroupIdsQueryParamType;
+import fi.koku.services.utility.user.v1.GroupType;
+import fi.koku.services.utility.user.v1.GroupsType;
 import fi.koku.services.utility.user.v1.UserIdsQueryParamType;
 import fi.koku.services.utility.user.v1.UserInfoServicePortType;
 import fi.koku.services.utility.user.v1.UserPicsQueryParamType;
@@ -36,6 +42,7 @@ public class SaloImpl implements PersonInfoProvider {
 
   private CustomerServicePortType customerService;
   private UserInfoServicePortType userService;
+  
 
   public SaloImpl() {
     // Initialize customerservice
@@ -181,5 +188,64 @@ public class SaloImpl implements PersonInfoProvider {
     }
 
     return personList;
+  }
+
+  @Override
+  public List<String> getGroupIds(String domain, String auditUserId,
+      String auditComponentId ) {
+    GroupsType groups = getGroups(domain,"*");
+    
+    List<String> tmp = new ArrayList<String>();
+    
+    if ( groups != null ) {
+      for ( GroupType gt : groups.getGroup() ) {
+        tmp.add(gt.getGroupId() );
+      }
+    }
+    
+    return tmp;
+  }
+
+  private GroupsType getGroups( String domain, String filter  ) {
+    GroupsType groups = null;
+    GroupIdsQueryParamType param = new GroupIdsQueryParamType();
+    
+    domain = domain.equals(PersonConstants.PERSON_SERVICE_DOMAIN_OFFICER) ? UserInfoServiceConstants.USER_INFO_SERVICE_DOMAIN_OFFICER 
+        : UserInfoServiceConstants.USER_INFO_SERVICE_DOMAIN_CUSTOMER;
+    
+    param.setDomain( domain );
+    param.getGroupId().add(filter);
+    
+    try {
+      groups = userService.opGetGroupsByIds(param);
+    } catch ( Exception e ) {
+      LOG.error("Failed to get group data from user info service", e);
+    }
+    return groups;
+  }
+
+  @Override
+  public Group getGroup(String domain, String groupId, String auditUserId, String auditComponentId ) {
+    GroupsType groups = getGroups(domain, groupId);
+    Group group = null;
+    
+    if ( groups != null ) {
+      List<String> list = new ArrayList<String>();
+      for ( GroupType gt : groups.getGroup() ) {
+         group = new Group();
+         group.setId(gt.getGroupId());
+         List<UserType> users = gt.getMembers();
+         
+         if ( users != null ) {
+           for ( UserType u : users ) {
+             list.add( u.getUserId() );
+           }
+           
+           List<Person> persons = getPersonsFromCustomerDomainWithUidList(list, auditUserId, auditComponentId);
+           group.setPersons(persons);
+         }
+      }
+    }    
+    return group;
   }
 }

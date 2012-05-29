@@ -16,4 +16,8 @@ public interface PersonInfoProvider {
   List<Person> getPersonsFromCustomerDomainWithPicList(List<String> pics, String auditUserId, String auditComponentId);
 
   List<Person> getPersonsFromOfficerDomainWithPicList(List<String> pics, String auditUserId, String auditComponentId);
+  
+  List<String> getGroupIds( String domain, String auditUserId, String auditComponentId);
+  
+  Group getGroup(String domain,  String groupId, String auditUserId, String auditComponentId);
 }
