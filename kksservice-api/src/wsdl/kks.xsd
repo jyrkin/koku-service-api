@@ -28,6 +28,10 @@
   
   <!-- element for persons kks collection -->
   <xsd:element name="kks" type="KksType"/> 
+  
+    
+  <!-- element for persons kks collection -->
+  <xsd:element name="kksPersonGroup" type="KksPersonGroupType"/> 
       
   <!-- element for collection id -->
   <xsd:element name="kksCollectionId" type="xsd:string"/>
@@ -40,6 +44,9 @@
   
   <!-- element for kks collections -->
   <xsd:element name="kksCollections" type="KksCollectionsType"/>
+  
+    <!-- element for kks group collections -->
+  <xsd:element name="kksGroupCollections" type="KksGroupCollectionsType"/>
   
   <!--  element for kks collection classes -->
   <xsd:element name="kksCollectionClasses" type="KksCollectionClassesType"/>
@@ -56,8 +63,14 @@
     <!-- element for kks collection criteria -->
   <xsd:element name="kksCollectionCriteria" type="KksCollectionsCriteriaType"/> 
   
+      <!-- element for kks group collection criteria -->
+  <xsd:element name="kksGroupCollectionCriteria" type="KksGroupCollectionsCriteriaType"/> 
+  
   <!-- element for kks collection creation criteria -->
   <xsd:element name="kksCollectionCreationCriteria" type="KksCollectionCreationCriteriaType"/> 
+  
+    <!-- element for kks group collection creation criteria -->
+  <xsd:element name="kksGroupCollectionCreationCriteria" type="KksGroupCollectionCreationCriteriaType"/> 
   
    <!-- element for kks entry add criteria -->
   <xsd:element name="kksEntryAddType" type="KksEntryCriteriaType"/> 
@@ -80,8 +93,32 @@
     </xsd:sequence>
   </xsd:complexType>  
   
+    <xsd:annotation>
+    <xsd:documentation xml:lang="en">
+      kksCollections: persons kks collections
+    </xsd:documentation>
+  </xsd:annotation>
+  <xsd:complexType name="KksPersonGroupType">
+    <xsd:sequence>
+      <xsd:element name="kksGroupCollections" type="KksGroupCollectionsType"/> 
+    </xsd:sequence>
+  </xsd:complexType>  
+  
   <xsd:complexType name="KksCollectionsType">
     <xsd:sequence>
+      <xsd:element name="kksCollection" type="KksCollectionType" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>  
+  
+  <xsd:complexType name="KksGroupCollectionsType">
+    <xsd:sequence>
+      <xsd:element name="kksPersonGroup" type="KksPersonCollectionsType" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>  
+  
+  <xsd:complexType name="KksPersonCollectionsType">
+    <xsd:sequence>
+      <xsd:element name="pic" type="xsd:string"/>
       <xsd:element name="kksCollection" type="KksCollectionType" minOccurs="0" maxOccurs="unbounded"/>
     </xsd:sequence>
   </xsd:complexType>  
@@ -98,6 +135,19 @@
   		<xsd:element name="kksScope" type="xsd:string" default="all" /> 
     </xsd:sequence>
   </xsd:complexType>  
+  
+    <xsd:annotation>
+    <xsd:documentation xml:lang="en">
+      pic: collection target person pics
+      kksScope: collection scope (all, minimal)
+    </xsd:documentation>
+  </xsd:annotation>
+  <xsd:complexType name="KksGroupCollectionsCriteriaType">
+    <xsd:sequence>
+        <xsd:element name="pic" type="xsd:string" minOccurs="1" maxOccurs="unbounded"/>
+      <xsd:element name="kksScope" type="xsd:string" default="minimal" /> 
+    </xsd:sequence>
+  </xsd:complexType> 
   
   <xsd:annotation>
     <xsd:documentation xml:lang="en">
@@ -117,6 +167,25 @@
         <xsd:element name="kksScope" type="xsd:string" default="new" />
     </xsd:sequence>
   </xsd:complexType>  
+  
+  
+   <xsd:annotation>
+    <xsd:documentation xml:lang="en">
+      pic: collection target person pic
+      collectionName: collection name
+      collectionTypeId: id of collection type
+      kksScope: creation scope (new)
+    </xsd:documentation>
+  </xsd:annotation>
+  <xsd:complexType name="KksGroupCollectionCreationCriteriaType">
+    <xsd:sequence>
+        <xsd:element name="pic" type="xsd:string" minOccurs="1" maxOccurs="unbounded"/>
+        <xsd:element name="collectionName" type="xsd:string"/>
+        <xsd:element name="collectionTypeId" type="xsd:string"/> 
+        <xsd:element name="kksScope" type="xsd:string" default="new" />
+    </xsd:sequence>
+  </xsd:complexType>  
+  
   
   <xsd:annotation>
     <xsd:documentation xml:lang="en">

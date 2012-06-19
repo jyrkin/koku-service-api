@@ -56,6 +56,14 @@
   <wsdl:message name="msgGetKksResponse">
     <wsdl:part name="KksType" element="kks:kks"/>    
   </wsdl:message>  
+  
+  <wsdl:message name="msgGetGroupKksRequest">
+    <wsdl:part name="KksGroupCollectionCriteria" element="kks:kksGroupCollectionCriteria"/>
+  </wsdl:message>
+  
+  <wsdl:message name="msgGetGroupKksResponse">
+    <wsdl:part name="KksType" element="kks:kksPersonGroup"/>    
+  </wsdl:message> 
 
   <wsdl:message name="msgAddKksCollectionRequest">
     <wsdl:part name="KksCollectionCreationCriteria" element="kks:kksCollectionCreationCriteria"/>
@@ -63,6 +71,14 @@
   
   <wsdl:message name="msgAddKksCollectionResponse">
     <wsdl:part name="KksCollection" element="kks:kksCollection"/>
+  </wsdl:message>
+  
+  <wsdl:message name="msgAddGroupKksCollectionRequest">
+    <wsdl:part name="KksGroupCollectionCreationCriteria" element="kks:kksGroupCollectionCreationCriteria"/>
+  </wsdl:message>
+  
+  <wsdl:message name="msgAddGroupKksCollectionResponse">
+    <wsdl:part name="KksOperationSuccess" element="kks:kksOperationSuccess"/> 
   </wsdl:message>
     
   <wsdl:message name="msgGetKksCollectionRequest">
@@ -151,6 +167,12 @@
       <wsdl:output message="tns:msgGetKksResponse"/>
       <wsdl:fault name="serviceFault" message="tns:serviceFault"/>
     </wsdl:operation>
+    
+    <wsdl:operation name="opGetGroupKks">
+      <wsdl:input message="tns:msgGetGroupKksRequest"/>
+      <wsdl:output message="tns:msgGetGroupKksResponse"/>
+      <wsdl:fault name="serviceFault" message="tns:serviceFault"/>
+    </wsdl:operation>
       
     <wsdl:operation name="opGetKksCollection">
       <wsdl:input message="tns:msgGetKksCollectionRequest"/>
@@ -161,6 +183,12 @@
     <wsdl:operation name="opAddKksCollection">
       <wsdl:input message="tns:msgAddKksCollectionRequest"/>
       <wsdl:output message="tns:msgIdResponse"/>
+      <wsdl:fault name="serviceFault" message="tns:serviceFault"/>
+    </wsdl:operation>
+    
+    <wsdl:operation name="opAddKksCollectionForGroup">
+      <wsdl:input message="tns:msgAddGroupKksCollectionRequest"/>
+      <wsdl:output message="tns:msgAddGroupKksCollectionResponse"/>
       <wsdl:fault name="serviceFault" message="tns:serviceFault"/>
     </wsdl:operation>
  
@@ -244,8 +272,36 @@
       </wsdl:fault>
     </wsdl:operation>
     
+    <wsdl:operation name="opGetGroupKks">
+      <soap11:operation soapAction="http://koku.fi/action/kks/group/get"/>
+      <wsdl:input>
+        <soap11:body use="literal"/>
+        <soap11:header use="literal" part="AuditHeader" message="tns:AuditHeader" wsdl:required="true"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap11:body use="literal"/>
+      </wsdl:output>
+     <wsdl:fault name="serviceFault">
+        <soap11:fault use="literal" name="serviceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    
     <wsdl:operation name="opAddKksCollection">
       <soap11:operation soapAction="http://koku.fi/action/kks/collection/add"/>
+      <wsdl:input>
+        <soap11:body use="literal"/>
+        <soap11:header use="literal" part="AuditHeader" message="tns:AuditHeader" wsdl:required="true"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="serviceFault">
+        <soap11:fault use="literal" name="serviceFault"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    
+    <wsdl:operation name="opAddKksCollectionForGroup">
+      <soap11:operation soapAction="http://koku.fi/action/kks/group/collection/add"/>
       <wsdl:input>
         <soap11:body use="literal"/>
         <soap11:header use="literal" part="AuditHeader" message="tns:AuditHeader" wsdl:required="true"/>
