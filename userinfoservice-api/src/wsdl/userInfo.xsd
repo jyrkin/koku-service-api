@@ -1,21 +1,19 @@
-<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-  targetNamespace="http://services.koku.fi/utility/user/v1"
-  xmlns="http://services.koku.fi/utility/user/v1"
-  elementFormDefault="qualified"
-  version="0.1"
-  >
-  
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://services.koku.fi/utility/user/v1"
+  xmlns="http://services.koku.fi/utility/user/v1" elementFormDefault="qualified" version="0.1">
+
   <xsd:annotation>
     <xsd:documentation xml:lang="en">
       KoKu user info service message type definitions.
-      Valid values for domain parameters are defined in UserInfoServiceConstants.
-      Currently USER_INFO_SERVICE_DOMAIN_CUSTOMER and USER_INFO_SERVICE_DOMAIN_OFFICER are supported.      
+      Valid values for
+      domain parameters are defined in UserInfoServiceConstants.
+      Currently USER_INFO_SERVICE_DOMAIN_CUSTOMER and
+      USER_INFO_SERVICE_DOMAIN_OFFICER are supported.
       Ixonos / hanhian
       Ixonos / hekkata
     </xsd:documentation>
   </xsd:annotation>
 
-  <xsd:element name="userIdsQueryParam" type="UserIdsQueryParamType"/>
+  <xsd:element name="userIdsQueryParam" type="UserIdsQueryParamType" />
 
   <xsd:complexType name="UserIdsQueryParamType">
     <xsd:sequence>
@@ -31,117 +29,217 @@
       <xsd:element name="id" type="xsd:string" maxOccurs="unbounded" />
     </xsd:sequence>
   </xsd:complexType>
-  
-  <xsd:element name="userPicsQueryParam" type="UserPicsQueryParamType"/>
- 
+
+  <xsd:element name="userPicsQueryParam" type="UserPicsQueryParamType" />
+
   <xsd:complexType name="UserPicsQueryParamType">
     <xsd:sequence>
-    <xsd:annotation>
+      <xsd:annotation>
         <xsd:documentation xml:lang="en">
           Valid values for domain parameter are defined in
           UserInfoServiceConstants.
           Currently USER_INFO_SERVICE_DOMAIN_CUSTOMER and USER_INFO_SERVICE_DOMAIN_OFFICER are
           supported.
         </xsd:documentation>
-     </xsd:annotation>
-     <xsd:element name="domain" type="xsd:string" minOccurs="1" maxOccurs="1"/>
-     <xsd:element name="pic" type="xsd:string" maxOccurs="unbounded"/>
+      </xsd:annotation>
+      <xsd:element name="domain" type="xsd:string" minOccurs="1" maxOccurs="1" />
+      <xsd:element name="pic" type="xsd:string" maxOccurs="unbounded" />
     </xsd:sequence>
-   </xsd:complexType>
-      
-  <xsd:element name="users" type="UsersType"/>
-  
+  </xsd:complexType>
+
+  <xsd:element name="users" type="UsersType" />
+
   <xsd:complexType name="UsersType">
     <xsd:sequence>
-     <xsd:element name="user" type="UserType" maxOccurs="unbounded"/>
+      <xsd:element name="user" type="UserType" maxOccurs="unbounded" />
     </xsd:sequence>
-   </xsd:complexType>
+  </xsd:complexType>
 
   <xsd:complexType name="UserType">
     <xsd:sequence>
-      <xsd:element name="userId" type="xsd:string"/>
-      <xsd:element name="firstname" type="xsd:string"/>
-      <xsd:element name="lastname" type="xsd:string"/>
-	  <xsd:element name="pic" type="xsd:string"/>
-      <xsd:element name="email" type="xsd:string"/>
+      <xsd:element name="userId" type="xsd:string" />
+      <xsd:element name="firstname" type="xsd:string" />
+      <xsd:element name="lastname" type="xsd:string" />
+      <xsd:element name="pic" type="xsd:string" />
+      <xsd:element name="email" type="xsd:string" />
     </xsd:sequence>
   </xsd:complexType>
- 
- <xsd:element name="groupIdsQueryParam" type="GroupIdsQueryParamType"/>
- 
+
+  <xsd:element name="groupIdsQueryParam" type="GroupIdsQueryParamType" />
+
   <xsd:complexType name="GroupIdsQueryParamType">
     <xsd:sequence>
-    <xsd:annotation>
+      <xsd:annotation>
         <xsd:documentation xml:lang="en">
           Valid values for domain parameter are defined in
           UserInfoServiceConstants.
           Currently USER_INFO_SERVICE_DOMAIN_CUSTOMER and USER_INFO_SERVICE_DOMAIN_OFFICER are
           supported.
         </xsd:documentation>
-     </xsd:annotation>
-     <xsd:element name="domain" type="xsd:string" minOccurs="1" maxOccurs="1"/>
-     <xsd:element name="groupId" type="xsd:string" maxOccurs="unbounded"/>
-     </xsd:sequence>
-   </xsd:complexType>
-      
-   <xsd:element name="userGroupsIdsQueryParam" type="userGroupsIdsQueryParamType"/>
- 
-  <xsd:complexType name="userGroupsIdsQueryParamType">
-    <xsd:sequence>
-    <xsd:annotation>
-        <xsd:documentation xml:lang="en">
-          Valid values for domain parameter are defined in
-          UserInfoServiceConstants.
-          Currently USER_INFO_SERVICE_DOMAIN_CUSTOMER and USER_INFO_SERVICE_DOMAIN_OFFICER are
-          supported.
-        </xsd:documentation>
-     </xsd:annotation>
-     <xsd:element name="domain" type="xsd:string" minOccurs="1" maxOccurs="1"/>
-     <xsd:element name="id" type="xsd:string" maxOccurs="unbounded"/>
-     </xsd:sequence>
-   </xsd:complexType>   
-     
-  <xsd:element name="userGroupsPicsQueryParam" type="userGroupsPicsQueryParamType"/>
- 
-  <xsd:complexType name="userGroupsPicsQueryParamType">
-    <xsd:sequence>
-    <xsd:annotation>
-        <xsd:documentation xml:lang="en">
-          Valid values for domain parameter are defined in
-          UserInfoServiceConstants.
-          Currently USER_INFO_SERVICE_DOMAIN_CUSTOMER and USER_INFO_SERVICE_DOMAIN_OFFICER are
-          supported.
-        </xsd:documentation>
-     </xsd:annotation>
-     <xsd:element name="domain" type="xsd:string" minOccurs="1" maxOccurs="1"/>
-     <xsd:element name="pic" type="xsd:string" maxOccurs="unbounded"/>
-     </xsd:sequence>
-   </xsd:complexType>   
-     
-      
-  <xsd:element name="groups" type="GroupsType"/>
-  
-  <xsd:complexType name="GroupsType">
-    <xsd:sequence>
-     <xsd:element name="group" type="GroupType" maxOccurs="unbounded"/>
-    </xsd:sequence> 
-   </xsd:complexType>
-  
-  <xsd:complexType name="GroupType">
-    <xsd:sequence>
-      <xsd:element name="groupId" type="xsd:string"/> 
-      <xsd:element name="members" type="UserType" maxOccurs="unbounded"/>      
+      </xsd:annotation>
+      <xsd:element name="domain" type="xsd:string" minOccurs="1" maxOccurs="1" />
+      <xsd:element name="groupId" type="xsd:string" maxOccurs="unbounded" />
     </xsd:sequence>
   </xsd:complexType>
-    
+
+  <xsd:element name="userGroupsIdsQueryParam" type="userGroupsIdsQueryParamType" />
+
+  <xsd:complexType name="userGroupsIdsQueryParamType">
+    <xsd:sequence>
+      <xsd:annotation>
+        <xsd:documentation xml:lang="en">
+          Valid values for domain parameter are defined in
+          UserInfoServiceConstants.
+          Currently USER_INFO_SERVICE_DOMAIN_CUSTOMER and USER_INFO_SERVICE_DOMAIN_OFFICER are
+          supported.
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:element name="domain" type="xsd:string" minOccurs="1" maxOccurs="1" />
+      <xsd:element name="id" type="xsd:string" maxOccurs="unbounded" />
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:element name="userGroupsPicsQueryParam" type="userGroupsPicsQueryParamType" />
+
+  <xsd:complexType name="userGroupsPicsQueryParamType">
+    <xsd:sequence>
+      <xsd:annotation>
+        <xsd:documentation xml:lang="en">
+          Valid values for domain parameter are defined in
+          UserInfoServiceConstants.
+          Currently USER_INFO_SERVICE_DOMAIN_CUSTOMER and USER_INFO_SERVICE_DOMAIN_OFFICER are
+          supported.
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:element name="domain" type="xsd:string" minOccurs="1" maxOccurs="1" />
+      <xsd:element name="pic" type="xsd:string" maxOccurs="unbounded" />
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:element name="groups" type="GroupsType" />
+
+  <xsd:complexType name="GroupsType">
+    <xsd:sequence>
+      <xsd:element name="group" type="GroupType" maxOccurs="unbounded" />
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="GroupType">
+    <xsd:sequence>
+      <xsd:element name="groupId" type="xsd:string" />
+      <xsd:element name="members" type="UserType" maxOccurs="unbounded" />
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:element name="portalUserNew" type="PortalUserType" />
+
+  <xsd:complexType name="PortalUserType">
+    <xsd:sequence>
+      <xsd:element name="firstNames" type="xsd:string" />
+      <xsd:element name="pic" type="xsd:string" />
+      <xsd:element name="surName" type="xsd:string" />
+      <xsd:element name="disabled" type="xsd:int" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="notificationMethod" type="xsd:int" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="password" type="xsd:string" />
+      <xsd:element name="userName" type="xsd:string" />
+      <xsd:element name="contactInfos" type="ContactInfoType" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:element name="portalUser" type="PortalUserAllType" />
+
+  <xsd:complexType name="PortalUserAllType">
+    <xsd:sequence>
+      <xsd:element name="firstNames" type="xsd:string" />
+      <xsd:element name="modificationTime" type="xsd:date" />
+      <xsd:element name="pic" type="xsd:string" />
+      <xsd:element name="surName" type="xsd:string" />
+      <xsd:element name="creationTime" type="xsd:date" />
+      <xsd:element name="disabled" type="xsd:int" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="lastLogin" type="xsd:date" />
+      <xsd:element name="lockedTime" type="xsd:date" />
+      <xsd:element name="notificationMethod" type="xsd:int" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="password" type="xsd:string" />
+      <xsd:element name="passwordChanged" type="xsd:date" />
+      <xsd:element name="userName" type="xsd:string" />
+      <xsd:element name="wrongPwdCount" type="xsd:int" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="contactInfos" type="ContactInfoType" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:element name="portalUserUpdate" type="PortalUserUpdateType" />
+
+  <xsd:complexType name="PortalUserUpdateType">
+    <xsd:sequence>
+      <xsd:element name="firstNames" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="surName" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="notificationMethod" type="xsd:int" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="userName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="password" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="newPassword" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="contactInfoUpdates" type="ContactInfoUpdateType" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  
+  <xsd:complexType name="ContactInfoType">
+    <xsd:sequence>
+      <xsd:annotation>
+        <xsd:documentation xml:lang="fi">
+          sahkoposti, puhelinnumero, kaupunki, maa, postinumero, katuosoite
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:element name="email" type="xsd:string" />
+      <xsd:element name="phoneNumber" type="xsd:string" />
+      <xsd:element name="city" type="xsd:string" />
+      <xsd:element name="country" type="xsd:string" />
+      <xsd:element name="postalCode" type="xsd:int" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="streetAddress" type="xsd:string" />
+    </xsd:sequence>
+  </xsd:complexType>
+
+ <xsd:complexType name="ContactInfoUpdateType">
+    <xsd:sequence>
+      <xsd:annotation>
+        <xsd:documentation xml:lang="fi">
+          sahkoposti, puhelinnumero, kaupunki, maa, postinumero, katuosoite
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:element name="email" type="xsd:string"  minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="phoneNumber" type="xsd:string"  minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="city" type="xsd:string"  minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="country" type="xsd:string"  minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="postalCode" type="xsd:int" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="streetAddress" type="xsd:string"  minOccurs="0" maxOccurs="1"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+
+  <xsd:element name="portalUserQueryParam" type="PortalUserQueryParamType" />
+
+  <xsd:complexType name="PortalUserQueryParamType">
+    <xsd:sequence>
+      <xsd:annotation>
+        <xsd:documentation xml:lang="en">
+          kayttajatunnus, salasana
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:element name="userName" type="xsd:string" minOccurs="1" maxOccurs="1" />
+      <xsd:element name="password" type="xsd:string" minOccurs="1" maxOccurs="1" />
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:element name="authenticationSuccess" type="xsd:boolean" />
+  
+  <xsd:element name="updateSuccess" type="xsd:boolean" />
+
   <!-- common type and element definitions -->
 
-  <xsd:element name="void" type="VoidType"/>
+  <xsd:element name="void" type="VoidType" />
 
   <xsd:complexType name="VoidType">
   </xsd:complexType>
 
-  <xsd:element name="serviceFaultDetail" type="ServiceFaultDetailType"/>
+  <xsd:element name="serviceFaultDetail" type="ServiceFaultDetailType" />
 
   <xsd:complexType name="ServiceFaultDetailType">
     <xsd:sequence>

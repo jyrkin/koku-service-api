@@ -59,6 +59,30 @@
     <wsdl:part name="Groups" element="usr:groups" />
   </wsdl:message>
 
+  <wsdl:message name="msgAddPortalUserRequest">
+    <wsdl:part name="msgAddPortalUserRequest" element="usr:portalUserNew" />
+  </wsdl:message>
+
+  <wsdl:message name="msgAddPortalUserResponse">
+    <wsdl:part name="addPortalUserResponse" element="usr:void" />
+  </wsdl:message>
+
+  <wsdl:message name="msgUpdatePortalUserRequest">
+    <wsdl:part name="msgUpdatePortalUserRequest" element="usr:portalUserUpdate" />
+  </wsdl:message>
+
+  <wsdl:message name="msgUpdatePortalUserResponse">
+    <wsdl:part name="updatePortalUserResponse" element="usr:updateSuccess" />
+  </wsdl:message>
+
+  <wsdl:message name="msgAuthenticatePortalUserRequest">
+    <wsdl:part name="msgAuthenticatePortalUserRequest" element="usr:portalUserQueryParam" />
+  </wsdl:message>
+
+  <wsdl:message name="msgAuthenticatePortalUserResponse">
+    <wsdl:part name="authenticatePortalUserResponse" element="usr:authenticationSuccess" />
+  </wsdl:message>
+
   <wsdl:message name="serviceFault">
     <wsdl:part name="ServiceFaultDetail" element="usr:serviceFaultDetail" />
   </wsdl:message>
@@ -98,6 +122,24 @@
     <wsdl:operation name="opGetUserGroupsByIds">
       <wsdl:input message="tns:msgGetUserGroupsByIdsRequest" />
       <wsdl:output message="tns:msgGetUserGroupsByIdsResponse" />
+      <wsdl:fault name="serviceFault" message="tns:serviceFault" />
+    </wsdl:operation>
+
+    <wsdl:operation name="opAddPortalUser">
+      <wsdl:input message="tns:msgAddPortalUserRequest" />
+      <wsdl:output message="tns:msgAddPortalUserResponse" />
+      <wsdl:fault name="serviceFault" message="tns:serviceFault" />
+    </wsdl:operation>
+
+    <wsdl:operation name="opUpdatePortalUser">
+      <wsdl:input message="tns:msgUpdatePortalUserRequest" />
+      <wsdl:output message="tns:msgUpdatePortalUserResponse" />
+      <wsdl:fault name="serviceFault" message="tns:serviceFault" />
+    </wsdl:operation>
+
+    <wsdl:operation name="opAuthenticatePortalUser">
+      <wsdl:input message="tns:msgAuthenticatePortalUserRequest" />
+      <wsdl:output message="tns:msgAuthenticatePortalUserResponse" />
       <wsdl:fault name="serviceFault" message="tns:serviceFault" />
     </wsdl:operation>
 
@@ -161,6 +203,45 @@
 
     <wsdl:operation name="opGetUserGroupsByIds">
       <soap11:operation soapAction="http://koku.fi/action/user/group/ids" />
+      <wsdl:input>
+        <soap11:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap11:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="serviceFault">
+        <soap11:fault use="literal" name="serviceFault" />
+      </wsdl:fault>
+    </wsdl:operation>
+
+    <wsdl:operation name="opAddPortalUser">
+      <soap11:operation soapAction="http://koku.fi/action/portaluser/add" />
+      <wsdl:input>
+        <soap11:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap11:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="serviceFault">
+        <soap11:fault use="literal" name="serviceFault" />
+      </wsdl:fault>
+    </wsdl:operation>
+
+    <wsdl:operation name="opUpdatePortalUser">
+      <soap11:operation soapAction="http://koku.fi/action/portaluser/update" />
+      <wsdl:input>
+        <soap11:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap11:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="serviceFault">
+        <soap11:fault use="literal" name="serviceFault" />
+      </wsdl:fault>
+    </wsdl:operation>
+
+    <wsdl:operation name="opAuthenticatePortalUser">
+      <soap11:operation soapAction="http://koku.fi/action/portaluser/authenticate" />
       <wsdl:input>
         <soap11:body use="literal" />
       </wsdl:input>
