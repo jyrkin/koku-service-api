@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions name="portalUserService" 
+  targetNamespace="http://services.koku.fi/utility/portal/v1"
+  xmlns:tns="http://services.koku.fi/utility/portal/v1" 
+  xmlns:por="http://services.koku.fi/utility/portal/v1" 
+  xmlns:soap11="http://schemas.xmlsoap.org/wsdl/soap/"
+  xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" 
+  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+  <wsdl:documentation>
+    KoKu portalUser service contract definition.
+
+    version: 0.1
+    Ixonos / hekkata
+  </wsdl:documentation>
+
+  <wsdl:types>
+    <xsd:schema>
+      <xsd:import namespace="http://services.koku.fi/utility/portal/v1" schemaLocation="portalUser.xsd" />
+    </xsd:schema>
+  </wsdl:types>
+
+  <!-- common messages -->
+
+  <wsdl:message name="msgGetPortalUserByPicRequest">
+    <wsdl:part name="portalUserPicQueryParam" element="por:portalUserPicQueryParam" />
+  </wsdl:message>
+
+  <wsdl:message name="msgGetPortalUserByPicResponse">
+    <wsdl:part name="portalUsers" element="por:portalUser" />
+  </wsdl:message>
+  
+  <wsdl:message name="msgAddPortalUserRequest">
+    <wsdl:part name="msgAddPortalUserRequest" element="por:portalUserNew" />
+  </wsdl:message>
+
+  <wsdl:message name="msgUpdatePortalUserRequest">
+    <wsdl:part name="msgUpdatePortalUserRequest" element="por:portalUserUpdate" />
+  </wsdl:message>
+
+  <wsdl:message name="msgAuthenticatePortalUserRequest">
+    <wsdl:part name="msgAuthenticatePortalUserRequest" element="por:portalUserAuthenticateParam" />
+  </wsdl:message>
+
+  <wsdl:message name="msgAuthenticatePortalUserResponse">
+    <wsdl:part name="authenticatePortalUserResponse" element="por:portalUser" />
+  </wsdl:message>
+
+   <wsdl:message name="msgDisablePortalUserRequest">
+    <wsdl:part name="msgDisablePortalUserRequest" element="por:portalUserDisableParam" />
+  </wsdl:message>
+  
+   <wsdl:message name="msgRemovePortalUserRequest">
+    <wsdl:part name="msgRemovePortalUserRequest" element="por:portalUserRemoveParam" />
+  </wsdl:message>
+  
+  <wsdl:message name="serviceFault">
+    <wsdl:part name="ServiceFaultDetail" element="por:serviceFaultDetail" />
+  </wsdl:message>
+
+  <wsdl:message name="voidResponse">
+    <wsdl:part name="VoidResponse" element="por:void" />
+  </wsdl:message>
+
+  <!-- interface / port type -->
+
+  <wsdl:portType name="portalUserServicePortType">
+
+    <wsdl:operation name="opGetPortalUserByPic">
+      <wsdl:input message="tns:msgGetPortalUserByPicRequest" />
+      <wsdl:output message="tns:msgGetPortalUserByPicResponse" />
+      <wsdl:fault name="serviceFault" message="tns:serviceFault" />
+    </wsdl:operation>
+    
+    <wsdl:operation name="opAddPortalUser">
+      <wsdl:input message="tns:msgAddPortalUserRequest" />
+      <wsdl:output message="tns:voidResponse" />
+      <wsdl:fault name="serviceFault" message="tns:serviceFault" />
+    </wsdl:operation>
+
+    <wsdl:operation name="opUpdatePortalUser">
+      <wsdl:input message="tns:msgUpdatePortalUserRequest" />
+      <wsdl:output message="tns:voidResponse" />
+      <wsdl:fault name="serviceFault" message="tns:serviceFault" />
+    </wsdl:operation>
+
+    <wsdl:operation name="opAuthenticatePortalUser">
+      <wsdl:input message="tns:msgAuthenticatePortalUserRequest" />
+      <wsdl:output message="tns:msgAuthenticatePortalUserResponse" />
+      <wsdl:fault name="serviceFault" message="tns:serviceFault" />
+    </wsdl:operation>
+
+    <wsdl:operation name="opDisablePortalUser">
+      <wsdl:input message="tns:msgDisablePortalUserRequest" />
+      <wsdl:output message="tns:voidResponse" />
+      <wsdl:fault name="serviceFault" message="tns:serviceFault" />
+    </wsdl:operation>
+   
+    <wsdl:operation name="opRemovePortalUser">
+      <wsdl:input message="tns:msgRemovePortalUserRequest" />
+      <wsdl:output message="tns:voidResponse" />
+      <wsdl:fault name="serviceFault" message="tns:serviceFault" />
+    </wsdl:operation>
+
+  </wsdl:portType>
+
+  <!-- bindings -->
+  <wsdl:binding name="portalUserService-soap11-binding" type="tns:portalUserServicePortType">
+    <soap11:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+
+    <wsdl:operation name="opGetPortalUserByPic">
+      <soap11:operation soapAction="http://koku.fi/action/portal/pic" />
+      <wsdl:input>
+        <soap11:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap11:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="serviceFault">
+        <soap11:fault use="literal" name="serviceFault" />
+      </wsdl:fault>
+    </wsdl:operation>
+    
+    <wsdl:operation name="opAddPortalUser">
+      <soap11:operation soapAction="http://koku.fi/action/portal/add" />
+      <wsdl:input>
+        <soap11:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap11:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="serviceFault">
+        <soap11:fault use="literal" name="serviceFault" />
+      </wsdl:fault>
+    </wsdl:operation>
+
+    <wsdl:operation name="opUpdatePortalUser">
+      <soap11:operation soapAction="http://koku.fi/action/portal/update" />
+      <wsdl:input>
+        <soap11:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap11:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="serviceFault">
+        <soap11:fault use="literal" name="serviceFault" />
+      </wsdl:fault>
+    </wsdl:operation>
+
+    <wsdl:operation name="opAuthenticatePortalUser">
+      <soap11:operation soapAction="http://koku.fi/action/portal/authenticate" />
+      <wsdl:input>
+        <soap11:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap11:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="serviceFault">
+        <soap11:fault use="literal" name="serviceFault" />
+      </wsdl:fault>
+    </wsdl:operation>
+
+     <wsdl:operation name="opDisablePortalUser">
+      <soap11:operation soapAction="http://koku.fi/action/portal/disable" />
+      <wsdl:input>
+        <soap11:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap11:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="serviceFault">
+        <soap11:fault use="literal" name="serviceFault" />
+      </wsdl:fault>
+    </wsdl:operation>
+      
+    <wsdl:operation name="opRemovePortalUser">
+      <soap11:operation soapAction="http://koku.fi/action/portal/remove" />
+      <wsdl:input>
+        <soap11:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap11:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="serviceFault">
+        <soap11:fault use="literal" name="serviceFault" />
+      </wsdl:fault>
+    </wsdl:operation>
+    
+
+  </wsdl:binding>
+
+  <!-- service definitions -->
+  <wsdl:service name="portalUserService">
+    <wsdl:port name="portalUserService-soap11-port" binding="tns:portalUserService-soap11-binding">
+      <soap11:address location="http://localhost:8088/portal/" />
+    </wsdl:port>
+  </wsdl:service>
+
+</wsdl:definitions>
