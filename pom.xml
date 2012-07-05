@@ -129,6 +129,7 @@
     <module>familyservice-api</module>
     <module>customercommunicationservice-api</module>
     <module>userinfoservice-api</module>
+	<module>portaluserservice-api</module>
   </modules>
   
   <repositories>
