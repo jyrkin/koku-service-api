@@ -50,7 +50,7 @@
 
   <xsd:complexType name="PortalUserUpdateType">
     <xsd:sequence>
-      <xsd:element name="customerId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="pic" type="xsd:string" minOccurs="1" maxOccurs="1"/>
       <xsd:element name="firstNames" type="xsd:string" minOccurs="0" maxOccurs="1"/>
       <xsd:element name="surName" type="xsd:string" minOccurs="0" maxOccurs="1"/>
       <xsd:element name="notificationMethod" type="xsd:int" minOccurs="0" maxOccurs="1"/>
