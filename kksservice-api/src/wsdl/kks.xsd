@@ -3,7 +3,7 @@
   targetNamespace="http://services.koku.fi/entity/kks/v1"
   xmlns="http://services.koku.fi/entity/kks/v1"
   elementFormDefault="qualified"
-  version="1.25"
+  version="1.26"
   >
   
   <xsd:annotation>
@@ -439,6 +439,7 @@
   
   <xsd:complexType name="KksCollectionInstancesType">
     <xsd:sequence>
+    <xsd:element name="collectionClass" type="KksCollectionClassType"/> 
     <xsd:element name="collections" type="KksCollectionInstanceType" minOccurs="0" maxOccurs="unbounded"/> 
     </xsd:sequence>
   </xsd:complexType>
