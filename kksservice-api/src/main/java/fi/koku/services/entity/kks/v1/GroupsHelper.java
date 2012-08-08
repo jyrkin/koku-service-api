@@ -13,11 +13,13 @@ package fi.koku.services.entity.kks.v1;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * GroupsHelper.
  * 
  * Hides the complexity of kksServicePortType.opGetKksCollectionClasses
+ * And kksServicePortType.opGetKksCollectionInstances
  * 
  * @author laukksa
  *
@@ -80,4 +82,32 @@ public class GroupsHelper {
     return groups;
   }
   
+  /**
+   * Get list of collection instances. Facade for kksServicePortType.opGetKksCollectionInstances
+   *
+   * @param userPic
+   * @param collectionType
+   * @return collection instances type
+   */
+  public KksCollectionInstancesType getCollectionInstances(String userPic, String collectionType) {
+      KksCollectionInstanceCriteriaType criteria = new KksCollectionInstanceCriteriaType();
+      criteria.setPic(userPic);
+      criteria.setType(collectionType);
+
+      AuditInfoType auditHeader = new AuditInfoType();
+      auditHeader.setComponent(component);
+      auditHeader.setUserId(userPic);
+
+      KksCollectionInstancesType kksCollectionInstances = null;
+
+      try {
+          kksCollectionInstances = kksServicePortType.opGetKksCollectionInstances(criteria, auditHeader);
+
+      } catch (ServiceFault e) {
+          throw new RuntimeException(e);
+      }
+
+      return kksCollectionInstances;
+  }
+
 }
