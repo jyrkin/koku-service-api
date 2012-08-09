@@ -45,9 +45,6 @@ public class PortalUserServiceFactory {
   public PortalUserServicePortType getPortalUserService() {
     if (wsdlLocation == null)
       log.error("wsdllocation=null");
-    System.out.println("AAJOJFOASIJFOAISJFAOIJOFIJsojifO");
-//    PortalUserService service = new PortalUserService(wsdlLocation, new QName(
-//        "http://services.koku.fi/utility/portaluser/v1", "PortalUserService"));
     PortalUserService service = new PortalUserService(wsdlLocation, new QName(
      "http://services.koku.fi/utility/portal/v1", "portalUserService"));
     

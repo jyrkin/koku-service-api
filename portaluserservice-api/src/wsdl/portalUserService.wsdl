@@ -11,7 +11,7 @@
   <wsdl:documentation>
     KoKu portalUser service contract definition.
 
-    version: 0.1
+    version: 0.4
     Ixonos / hekkata
   </wsdl:documentation>
 
