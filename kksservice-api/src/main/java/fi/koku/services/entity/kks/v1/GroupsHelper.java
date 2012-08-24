@@ -110,4 +110,28 @@ public class GroupsHelper {
       return kksCollectionInstances;
   }
 
+  /**
+    * Get list of collection classes. Facade for kksServicePortType.opGetKksCollectionClasses
+    *
+    * @param userPic
+    * @return collection classes type
+    */
+
+  public KksCollectionClassesType getCollectionClasses(String userPic) {
+      AuditInfoType auditHeader = new AuditInfoType();
+      auditHeader.setComponent(component);
+      auditHeader.setUserId(userPic);
+
+      KksCollectionClassesType kksCollectionClasses = null;
+
+      try {
+          kksCollectionClasses = kksServicePortType.opGetKksCollectionClasses("scope", auditHeader);
+
+      } catch (ServiceFault e) {
+          throw new RuntimeException(e);
+      }
+
+      return kksCollectionClasses;
+  }
+
 }
